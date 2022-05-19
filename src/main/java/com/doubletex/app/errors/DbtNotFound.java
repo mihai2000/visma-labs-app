@@ -13,10 +13,11 @@ import java.time.LocalDateTime;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 @JsonIgnoreProperties({"suppressed", "cause", "stackTrace","localizedMessage"})
 public class DbtNotFound extends RuntimeException {
+    private final int httpCode = HttpStatus.NOT_FOUND.value();
     private Class<?> entityClass;
     private long id;
     private final LocalDateTime time = LocalDateTime.now();
-    private final int httpCode = HttpStatus.NOT_FOUND.value();
+
 
     public DbtNotFound(Class<?> entityClass, long id) {
         this.entityClass = entityClass;
