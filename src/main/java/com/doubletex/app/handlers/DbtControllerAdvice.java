@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.lang.reflect.Field;
-
 @RestControllerAdvice
 public class DbtControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -28,4 +26,8 @@ public class DbtControllerAdvice {
     public DbtNotFound handleCustomException(DbtNotFound ex) {
         return ex;
     }
+
+    @ExceptionHandler(DbtBadRequest.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public DbtBadRequest handleCustomException(DbtBadRequest ex) {return ex; }
 }

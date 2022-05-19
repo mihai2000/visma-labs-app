@@ -1,11 +1,9 @@
 package com.doubletex.app.api.employee;
 
-import com.doubletex.app.errors.DbtNotFound;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employee")
@@ -17,12 +15,17 @@ public class EmployeeAPI {
     @GetMapping("/{id}")
     public Employee get(@PathVariable Long id){
         //throw new DbtNotFound(Employee.class, id);
-        return employeeService.get(id).orElseThrow(()->new DbtNotFound(Employee.class, id));
+        return employeeService.get(id);
     }
 
     @PostMapping("")
-    public void post(@RequestBody @Valid Employee employee){
+    public Employee post(@Valid @RequestBody Employee employee){
+        return employeeService.post(employee);
+    }
 
-        employeeService.post(employee);
+    @PutMapping("/{id}/raiseSalary")
+    public Employee raiseSalary(@PathVariable Long id, @RequestParam Double newSalary){
+        var result = employeeService.raiseSalary(id,newSalary);
+        return result;
     }
 }
