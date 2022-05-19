@@ -28,4 +28,9 @@ public class DbtControllerAdvice {
     public DbtNotFound handleCustomException(DbtNotFound ex) {
         return ex;
     }
+
+    @ExceptionHandler(DoubletexBadRequest.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public DoubletexBadRequest handleCustomException(DoubletexBadRequest e) {return ex;
+    }
 }

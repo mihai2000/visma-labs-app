@@ -17,4 +17,22 @@ public class EmployeeService {
     public void post(Employee employee){
         employeeRepository.save(employee);
     }
-}
+
+    public Employee raiseSalary(Long id, Double newSalary){
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new DbtNotFound(Employee.class, id));
+        validateSalaryRaise(employee, newSalary);
+        DbtBadRequest.current().throwIfNecessary();
+        employee.setSalary(newSalary);
+        return employeeRepository.save(employee);
+    }
+
+    public void validateSalaryRaise(Employee employee, Double newSalary){
+        DbtBadRequest dbtBadRequest = DbtBadRequest.current();
+    }
+        if(employee.getSalary() > newSalary){
+            DbtBadRequest.current().addValidation("salary", "New Salary isn't big enough!");
+        }
+    }
+
+ 
