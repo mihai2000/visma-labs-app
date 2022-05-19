@@ -1,7 +1,7 @@
 import {Button, TextField} from "@mui/material";
 import {useState} from "react";
 import {blankEmployee, Employee, EmployeeError} from "./EmployeeForm.types";
-
+import './EmployeeForm.css';
 export type EmployeeFormProps = {
     employee: Employee,
     setEmployee: (employee: Employee) => void,
@@ -11,10 +11,11 @@ export type EmployeeFormProps = {
 
 export function EmployeeForm(props: EmployeeFormProps) {
     return (
-        <form autoComplete={'off'}>
+        <form autoComplete={'off'} className={"employee-form__form"}>
+            <h1>Employee</h1>
             <TextField
                 value={props.employee.firstName}
-                placeholder={'First Name'}
+                label={'First Name'}
                 onChange={(e) => {
                     const newEmployee: Employee = {...props.employee, firstName: e.currentTarget.value}
                     props.setEmployee(newEmployee)
@@ -24,7 +25,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
             />
             <TextField
                 value={props.employee.lastName}
-                placeholder={'Last Name'}
+                label={'Last Name'}
                 onChange={(e) => {
                     const newEmployee: Employee = {...props.employee, lastName: e.currentTarget.value}
                     props.setEmployee(newEmployee)
@@ -32,7 +33,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
                 error={props.error.lastName !== undefined}
                 helperText={props.error.lastName}
             />
-            <Button onClick={(e) => {
+            <Button variant={"contained"} onClick={(e) => {
                 props.submit()
             }}>
                 Submit
