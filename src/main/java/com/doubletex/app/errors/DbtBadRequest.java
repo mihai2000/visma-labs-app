@@ -22,6 +22,7 @@ public class DbtBadRequest extends RuntimeException {
     private LocalDateTime time = LocalDateTime.now();
     private static ThreadLocal<DbtBadRequest> local = ThreadLocal.withInitial(DbtBadRequest::new);
 
+
     public void addValidations(String fieldName, String validationMessage) {
         Set<String> validationMessages;
         if (fields.containsKey(fieldName)){
@@ -32,7 +33,11 @@ public class DbtBadRequest extends RuntimeException {
     validationMessages.add(validationMessage);
     fields.put(fieldName,validationMessages);
 }
-public void throwIfNecessary() throws DbtBadRequest{
-    if(!fields.isEmpty()) throw this;
-        }
+    public void throwIfNecessary() throws DbtBadRequest{
+        if(!fields.isEmpty()) throw this;
     }
+
+    public static DbtBadRequest current() {
+        return local.get();
+    }
+}
