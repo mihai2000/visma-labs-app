@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.lang.reflect.Field;
-
 @RestControllerAdvice
 public class DbtControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -29,8 +27,7 @@ public class DbtControllerAdvice {
         return ex;
     }
 
-    @ExceptionHandler(DoubletexBadRequest.class)
+    @ExceptionHandler(DbtBadRequest.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public DoubletexBadRequest handleCustomException(DoubletexBadRequest e) {return ex;
-    }
+    public DbtBadRequest handleCustomException(DbtBadRequest ex) {return ex; }
 }
