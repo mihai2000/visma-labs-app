@@ -4,22 +4,25 @@ import './App.css'
 import {Icon} from "@mui/material";
 import {EmployeeForm} from "./Pages/EmployeeForm/EmployeeForm";
 import {useEmployeeForm} from "./Pages/EmployeeForm/useEmployeeForm";
+import { Routes, Route, Link } from "react-router-dom";
+import {EmployeeList} from "./Pages/EmployeeList/EmployeeList";
+import {useEmployeeList} from "./Pages/EmployeeList/useEmployeeList";
+
 
 function App() {
-  // const [count, setCount] = useState(0)
-  // let number = 0
-  //
-  // useEffect(()=> {
-  //   window.fetch('/api/employee/1')
-  //       .then(r => r.json())
-  //       .then(resp=> console.log(resp))
-  // },[])//array de dependinte, a aparut pagina pe ecran, lanseaza useEffect
-
-  return (
+    return (
     <div>
-    <EmployeeForm {...useEmployeeForm()}/>
+      <Routes>
+          <Route path="/" element={
+              <h1>Welcome <br/>
+                  <a href="/employee">Go to form</a>
+              </h1>
+          }/>
+              <Route path="/employee" element={ <EmployeeForm {...useEmployeeForm()}/>}/>
+              <Route path="/employeeList" element={ <EmployeeList {...useEmployeeList()}/>}/>
+      </Routes>
     </div>
   )
 }
 
-export default App
+export default App;
