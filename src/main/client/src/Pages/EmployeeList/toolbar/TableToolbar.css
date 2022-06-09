@@ -1,0 +1,12 @@
+.employee-list__table-toolbar{
+    padding: 8px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+    justify-content: space-between;
+    align-items: center;
+}
+.employee-list__table-toolbar *{
+    color: blue;
+}
